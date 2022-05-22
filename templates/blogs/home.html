@@ -1,0 +1,71 @@
+{% extends 'blogs/base2.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+      <div class="row mt-4">
+        <div class="d-flex justify-content-center mb-2">
+          <h2>Headlines and Popular Articles </h2>
+        </div>
+
+        <div class="col-6 mt-2 container mr-6 pl-2 ">
+          <div class="mb-2 mx-auto">
+              <h3>Headlines</h3>
+          </div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+              {% for headline in headlines %}
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-heading{{headline.pk}}f">
+                <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#activity{{headline.pk}}f" aria-expanded="false" aria-controls="activity{{headline.pk}}f">
+                  {{headline.title}}
+                </button>
+              </h2>
+              <div id="activity{{headline.pk}}f" class="accordion-collapse collapse" aria-labelledby="flush-heading{{headline.pk}}f" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">{{headline.description|linebreaks|truncatechars:300 }} <a href="{% url 'blog_item' pk=headline.pk %}">Read More</a></div>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+        </div>
+        <div class="col-6 mt-2 container mr-6 pl-2 ">
+          <div class="mb-2 mx-auto">
+              <h3>popular</h3>
+          </div>
+          <div class="accordion accordion-flush" id="faccordionFlushExample">
+              {% for popular in populars %}
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-heading{{popular.pk}}">
+                <button class="accordion-button collapsed  bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#notice{{popular.pk}}" aria-expanded="false" aria-controls="notice{{popular.pk}}">
+                 {{popular.title}}
+                </button>
+              </h2>
+              <div id="notice{{popular.pk}}" class="accordion-collapse collapse" aria-labelledby="flush-heading{{popular.pk}}" data-bs-parent="#faccordionFlushExample">
+                <div class="accordion-body">{{popular.description|linebreaks|truncatechars:300}} <a href="{% url 'blog_item' pk=popular.pk %}">Read More</a></div>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="d-flex mt-4 mb-2 mx-auto justify-content-center">
+          <h3 class="">Upcoming Events</h3>
+      </div>
+          {% for event in events %}
+      <div class="row mb-4 mt-2">
+        <div class="col-3 container mr-2 pl-2">
+          <img src="{% static 'assets/img/event.png' %}" class="img img-fluid" alt="Event" srcset="">
+      </div>
+      <div class="col-9 container ml-2 pl-2">
+          <h5>{{event.title}}</h5>
+          <p class="lead">{{ event.date_of_event }}</p>
+          <p>{{event.venue}}</p>
+      </div>
+      </div>
+          {% endfor %}
+
+      </div>
+    </div>
+
+{% endblock %}
+

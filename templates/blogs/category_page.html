@@ -1,0 +1,48 @@
+{% extends 'blogs/base2.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+      <div class="row mt-4">
+        <div class="d-flex justify-content-center mb-2">
+          <h2>{{Category_Name}} </h2>
+        </div>
+
+        <div class="col-9 mt-2 container mr-6 pl-2 ">
+          <div class="mb-2 mx-auto">
+              <h3>All Articles</h3>
+          </div>
+          <div class="accordion accordion-flush" id="accordionFlushExample">
+              {% for article in articles %}
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="flush-heading{{article.pk}}f">
+                <button class="accordion-button collapsed bg-success text-white" type="button" data-bs-toggle="collapse" data-bs-target="#activity{{article.pk}}f" aria-expanded="false" aria-controls="activity{{article.pk}}f">
+                  {{article.title}}
+                </button>
+              </h2>
+              <div id="activity{{article.pk}}f" class="accordion-collapse collapse" aria-labelledby="flush-heading{{article.pk}}f" data-bs-parent="#accordionFlushExample">
+                <div class="accordion-body">{{article.description|linebreaks|truncatechars:500 }} <a href="{% url 'blog_item' pk=article.pk %}">Read More</a></div>
+              </div>
+            </div>
+              {% endfor %}
+          </div>
+        </div>
+          <div class="col-3 container mt-5 mb-2">
+            <ul class="list-group">
+            <a class="list-group-item list-group-item-action bg-success text-white" aria-current="true">
+              <h4><strong>Recently viewed</strong></h4>
+  </a>
+                {% if user.is_authenticated %}
+              {% for recent in recents %}
+  <a href="" class="list-group-item list-group-item-action">{{recent.blog.title}}</a>
+              {% endfor %}
+                {% else %}
+                <a href="" class="list-group-item list-group-item-action">Subscriber? Login to view Your Recent activity <br> <span>Not a subscriber? please subscribe now </span></a>
+                {% endif %}
+</ul>
+      </div>
+      </div>
+    </div>
+<br><br>
+{% endblock %}
+

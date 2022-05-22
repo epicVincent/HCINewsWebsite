@@ -1,0 +1,48 @@
+{% extends 'blogs/base.html' %}
+{% block breadcrumb %}
+
+<ol class="breadcrumb">
+            <li class="breadcrumb-item">
+              <a href="index.html">Blog</a>
+            </li>
+            <li class="breadcrumb-item active">Delete</li>
+          </ol>
+
+{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+<form method="POST">
+    {%csrf_token%}
+
+        <p class="lead">Are you sure you wnat to delete {{ object }}</p>
+
+    <input type="submit" class="btn btn-danger" value="Confirm">
+</form>
+ </div>
+
+   <!--- notification-modal -->
+    <div class="modal" id="notifmodal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <!-- Modal Header -->
+      <div class="modal-header">
+        <h4 class="modal-title">Modal Heading</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+
+      <!-- Modal body -->
+      <div class="modal-body">
+        Modal body..
+      </div>
+
+      <!-- Modal footer -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+{% endblock %}
