@@ -142,9 +142,9 @@ def subscriber_login(request):
                 # Send the user back to some page.
                 # In this case their homepage.
                 if user.is_superuser:
-                    return HttpResponseRedirect(reverse('view_applicationforms'))
+                    return HttpResponseRedirect(reverse('view_blogs'))
                 else:
-                    return HttpResponseRedirect(reverse('view_applicationforms'))
+                    return HttpResponseRedirect(reverse('view_homepage'))
             else:
                 # If account is not active:
                 return HttpResponse("Your account is not active.")

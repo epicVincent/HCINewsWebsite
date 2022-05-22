@@ -113,10 +113,10 @@ def add_event(request):
                 date_of_event = date_of_event
             )
             event.save()
-            messages.success(request, "Notice added Successfully")
+            messages.success(request, "Event added Successfully")
             return redirect('add_event')
         else:
-            messages.error(request, "unable to add notice: " + str(form.errors.as_json()))
+            messages.error(request, "unable to add Event: " + str(form.errors.as_json()))
             print("unable to add Event: " + str(form.errors.as_json()))
             return redirect('add_event')
 
